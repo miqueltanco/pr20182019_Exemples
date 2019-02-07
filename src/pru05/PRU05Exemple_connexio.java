@@ -1,4 +1,5 @@
 package pru05;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,8 +18,8 @@ public class PRU05Exemple_connexio {
         try {
 
             connect = DriverManager
-                    .getConnection("jdbc:mysql://172.16.26.200/employees?"
-                            + "user=alumnes&password=tofol");
+                    .getConnection("jdbc:mysql://localhost:3306/employees?serverTimezone=UTC&useSSL=false&"
+                            + "user=root&password=cide1234");
 
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
@@ -46,6 +47,12 @@ public class PRU05Exemple_connexio {
             // starting at 1
             // e.g. resultSet.getSTring(2);
         	
+        	/*Empleado empleado = new Empleado();
+        	
+        	empleado.setEmp_no(resultSet.getInt("emp_no"));
+        	empleado.setBirth_date(resultSet.getDate("birth_date"));
+        	empleado.setFirst_name(resultSet.getString("first_name"));
+        	*/
             int emp_no = resultSet.getInt("emp_no");
             Date birth_date = resultSet.getDate("birth_date");
             String first_name = resultSet.getString("first_name");
