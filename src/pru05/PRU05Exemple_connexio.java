@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 public class PRU05Exemple_connexio {
 
@@ -19,7 +20,7 @@ public class PRU05Exemple_connexio {
 
             connect = DriverManager
                     .getConnection("jdbc:mysql://localhost:3306/employees?serverTimezone=UTC&useSSL=false&"
-                            + "user=root&password=cide1234");
+                            + "user=root&password=Cide2018");
 
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
@@ -41,29 +42,33 @@ public class PRU05Exemple_connexio {
 
     private void writeResultSet(ResultSet resultSet) throws SQLException {
         
+    	ArrayList<Empleado> empleats = new ArrayList<Empleado>();
+    	
         while (resultSet.next()) {
             // It is possible to get the columns via name
             // but also possible to get the columns via the column number
             // starting at 1
             // e.g. resultSet.getSTring(2);
-        	
-        	/*Empleado empleado = new Empleado();
-        	
-        	empleado.setEmp_no(resultSet.getInt("emp_no"));
-        	empleado.setBirth_date(resultSet.getDate("birth_date"));
-        	empleado.setFirst_name(resultSet.getString("first_name"));
-        	*/
-            int emp_no = resultSet.getInt("emp_no");
-            Date birth_date = resultSet.getDate("birth_date");
-            String first_name = resultSet.getString("first_name");
-            String last_name = resultSet.getString("last_name");
 
-            System.out.println("Num empleat: " + emp_no);
-            System.out.println("Data naixament: " + birth_date);
-            System.out.println("Nom: " + first_name);
-            System.out.println("Llinatge: " + last_name);
+        	int i = 0;
+        	
+        	empleats.add(new Empleado(resultSet.getInt("emp_no"), resultSet.getDate("birth_date"), resultSet.getString("first_name"), resultSet.getString("last_name")));
+        	
+           /* 
+            * int emp_no = resultSet.getInt("emp_no");
+            * Date birth_date = resultSet.getDate("birth_date");
+            * String first_name = resultSet.getString("first_name");
+            * String last_name = resultSet.getString("last_name");
+            */
+
+            System.out.println("Num empleat: " + empleats.get(i).emp_no);
+            System.out.println("Data naixament: " + empleats.get(i).birth_date);
+            System.out.println("Nom: " + empleats.get(i).first_name);
+            System.out.println("Llinatge: " + empleats.get(i).last_name);
             System.out.println("======================");
            
+            i++;
+            
         }
     }
 
