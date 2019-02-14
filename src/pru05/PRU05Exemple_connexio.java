@@ -19,8 +19,8 @@ public class PRU05Exemple_connexio {
         try {
 
             connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/employees?serverTimezone=UTC&useSSL=false&"
-                            + "user=root&password=Cide2018");
+                    .getConnection("jdbc:mysql://localhost:3306/employees?useSSL=false&"
+                            + "user=root&password=cide1234");
 
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
@@ -43,14 +43,13 @@ public class PRU05Exemple_connexio {
     private void writeResultSet(ResultSet resultSet) throws SQLException {
         
     	ArrayList<Empleado> empleats = new ArrayList<Empleado>();
+    	int i = 0;
     	
         while (resultSet.next()) {
             // It is possible to get the columns via name
             // but also possible to get the columns via the column number
             // starting at 1
             // e.g. resultSet.getSTring(2);
-
-        	int i = 0;
         	
         	empleats.add(new Empleado(resultSet.getInt("emp_no"), resultSet.getDate("birth_date"), resultSet.getString("first_name"), resultSet.getString("last_name")));
         	
